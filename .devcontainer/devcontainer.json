@@ -1,0 +1,34 @@
+// See https://aka.ms/vscode-remote/devcontainer.json for format details.
+{
+   "name": "inventory-management-ui",
+   "dockerComposeFile": [
+      "docker-compose.yml"
+   ],
+   // The name of the following service has to match one of the services in docker-compose.yml
+   "service": "inventory-management-ui",
+   "workspaceFolder": "/work",
+   "overrideCommand": true,
+   "customizations": {
+      // Configure properties specific to VS Code.
+      "vscode": {
+         // Add the IDs of extensions you want installed when the container is created.
+         "extensions": [
+			"bradlc.vscode-tailwindcss",
+			"firsttris.vscode-jest-runner",
+			"eamodio.gitlens",
+			"editorconfig.editorconfig",
+			"ms-vsliveshare.vsliveshare",
+			"naumovs.color-highlight",
+			"ms-azuretools.vscode-docker",
+			"dbaeumer.vscode-eslint",
+			"esbenp.prettier-vscode"
+		],
+         "settings": {
+            "remote.autoForwardPorts": false,
+            "remote.restoreForwardedPorts": false
+         }
+      }
+   },
+   "shutdownAction": "stopCompose",
+   "remoteUser": "root"
+}

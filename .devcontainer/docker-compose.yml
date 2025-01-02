@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+   inventory-management-ui:
+      image: inventory-management-ui:0.1
+      build: .
+      container_name: inventory-management-ui-dev
+      hostname: inventory-management-ui.local
+      working_dir: /work
+      ports:
+        - "5900:5900" # Used when running CRA's dev server
+        - "5901:5901" # Used when running story-book's dev server
+      volumes:
+         - ..:/work
+         # Allow AWS CLI and other tools to read an AWS profile
+         #  - ~/.aws:/home/node/.aws
+      environment:
+         - ENVIRONMENT=local
+      networks:
+         - private
+
+networks:
+   private:

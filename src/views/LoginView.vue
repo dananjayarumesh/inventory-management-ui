@@ -1,6 +1,6 @@
 <script setup>
 // import TheWelcome from '../components/TheWelcome.vue'
-import { ref, reactive } from 'vue';
+import { ref } from 'vue';
 import { useAuthStore } from "@/stores/auth";
 
 const email = ref('');
@@ -10,7 +10,7 @@ const auth = useAuthStore();
 const handleLogin = async () => {
   await auth.login(email.value, password.value);
   if (auth.user) {
-    
+    // redirect
   }
 }
 </script>
@@ -18,7 +18,6 @@ const handleLogin = async () => {
 <template>
   <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-      <!-- <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company"> -->
       <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Sign in to your account</h2>
     </div>
 
@@ -41,8 +40,8 @@ const handleLogin = async () => {
             <input type="password" v-model="password" name="password" id="password" autocomplete="current-password"
               required
               class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-              <p v-if="auth.errors.password" class="text-sm text-red-500">{{ auth.errors.password }}</p>
-            </div>
+            <p v-if="auth.errors.password" class="text-sm text-red-500">{{ auth.errors.password }}</p>
+          </div>
         </div>
 
         <div>
@@ -51,11 +50,6 @@ const handleLogin = async () => {
             in</button>
         </div>
       </form>
-
-      <!-- <p class="mt-10 text-center text-sm/6 text-gray-500">
-      Not a member?
-      <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Start a 14 day free trial</a>
-    </p> -->
     </div>
   </div>
 </template>

@@ -8,10 +8,9 @@ export const useAuthStore = defineStore('auth', () => {
   const user = reactive({});
 
   const login = async (email, password) => {
-
     loading.value = true;
-    errors.email = "";
-    errors.password = "";
+    errors.email = '';
+    errors.password = '';
 
     const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -20,17 +19,20 @@ export const useAuthStore = defineStore('auth', () => {
         email,
         password,
       });
-
-      console.log('sds');
-      user.value = response.data.user; // Save user info
-      localStorage.setItem("access_token", response.data.access_token); // Save token
+      localStorage.setItem('access_token', response.data.access_token); // Save token
+      return true;
     } catch (error) {
       if (error.response?.data?.error) {
         errors.email = error.response.data.error || '';
       }
+      return false;
     } finally {
       loading.value = false;
     }
+  };
+
+  const logout = () => {
+    localStorage.removeItem('access_token');
   };
 
   return {
@@ -38,5 +40,6 @@ export const useAuthStore = defineStore('auth', () => {
     errors,
     loading,
     login,
+    logout
   };
 })

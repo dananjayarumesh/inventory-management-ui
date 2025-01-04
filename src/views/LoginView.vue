@@ -1,16 +1,17 @@
 <script setup>
-// import TheWelcome from '../components/TheWelcome.vue'
 import { ref } from 'vue';
-import { useAuthStore } from "@/stores/auth";
+import { useAuthStore } from '@/stores/auth';
+import { useRouter } from 'vue-router';
 
 const email = ref('');
 const password = ref('');
 const auth = useAuthStore();
+const router = useRouter();
 
 const handleLogin = async () => {
-  await auth.login(email.value, password.value);
-  if (auth.user) {
-    // redirect
+  const loginSuccess = await auth.login(email.value, password.value);
+  if (loginSuccess) {
+    router.push({ path: '/' });
   }
 }
 </script>

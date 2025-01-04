@@ -1,19 +1,38 @@
-# Inventory Management
+# Inventory Management UI
 
-This template should help get you started developing with Vue 3 in Vite.
+A simple inventory management system that tracks the receipt and dispatch of quantities, with automated alerts when inventory levels hit predefined thresholds.
 
-## Recommended IDE Setup
+### Overview
+* [Development environment setup](#development-environment-setup)
+* [Environment variables](#environment-variables)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Development environment setup
 
-## Customize configuration
+This repository is designed to use a development container.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### Prerequisites
 
-## Project Setup
+The prerequisites for working on this repo are:
 
-```sh
-npm install
+-   Docker Desktop (MacOS, Windows) or docker engine (Linux)
+-   GIT
+-   VS Code
+-   VS Code Extension "Remote Development"
+
+All other prerequisites are provided by the dev container and its dependencies.
+
+VSCode and other IDEA-based IDEs can use devcontainers to set up the development environment. Simply open the project in the IDE and choose the 'Open in Container' option to get started.
+
+### Install dependencies
+
+```bash
+npm ci
+```
+
+### Copy env sample file
+
+```bash
+cp .env.sample .env
 ```
 
 ### Compile and Hot-Reload for Development
@@ -39,3 +58,7 @@ npm run test:unit
 ```sh
 npm run lint
 ```
+
+## Environment variables
+
+* VITE_API_URL : Base URL of the REST API gateway

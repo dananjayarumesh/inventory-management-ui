@@ -10,17 +10,19 @@ import {
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
 import { useAuthStore } from '@/stores/auth';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 const auth = useAuthStore();
 const router = useRouter();
+const route = useRoute();
+
+const mobileMenuOpen = ref(false)
+const routeName = route.name;
 
 const logout = async () => {
   auth.logout();
   router.push({ path: '/login' });
 }
-
-const mobileMenuOpen = ref(false)
 </script>
 
 <template>
@@ -40,19 +42,29 @@ const mobileMenuOpen = ref(false)
         </button>
       </div>
       <PopoverGroup class="hidden lg:flex lg:gap-x-12">
-        <router-link :to="{ name: 'inventory' }" class="text-sm/6 font-semibold text-gray-900">
+        <router-link :to="{ name: 'inventory' }"
+          class="py-2.5 px-2 rounded-md text-sm/6 font-semibold text-gray-900"
+          :class="{ 'bg-blue-700 text-white': routeName === 'inventory' }">
           Inventory
         </router-link>
-        <router-link :to="{ name: 'dispatch-notes' }" class="text-sm/6 font-semibold text-gray-900">
+        <router-link :to="{ name: 'dispatch-notes' }" 
+        class="py-2.5 px-2 rounded-md text-sm/6 font-semibold text-gray-900"
+        :class="{ 'bg-blue-700 text-white': routeName === 'dispatch-notes' }">
           Dispatch Notes
         </router-link>
-        <router-link :to="{ name: 'receive-notes' }" class="text-sm/6 font-semibold text-gray-900">
+        <router-link :to="{ name: 'receive-notes' }" 
+        class="py-2.5 px-2 rounded-md text-sm/6 font-semibold text-gray-900"
+        :class="{ 'bg-blue-700 text-white': routeName === 'receive-notes' }">
           Receive Notes
         </router-link>
-        <router-link :to="{ name: 'categories' }" class="text-sm/6 font-semibold text-gray-900">
+        <router-link :to="{ name: 'categories' }" 
+        class="py-2.5 px-2 rounded-md text-sm/6 font-semibold text-gray-900"
+        :class="{ 'bg-blue-700 text-white': routeName === 'categories' }">
           Categories
         </router-link>
-        <router-link :to="{ name: 'users' }" class="text-sm/6 font-semibold text-gray-900">
+        <router-link :to="{ name: 'users' }" 
+        class="py-2.5 px-2 rounded-md text-sm/6 font-semibold text-gray-900"
+        :class="{ 'bg-blue-700 text-white': routeName === 'users' }">
           Users
         </router-link>
       </PopoverGroup>
@@ -78,11 +90,11 @@ const mobileMenuOpen = ref(false)
         <div class="mt-6 flow-root">
           <div class="-my-6 divide-y divide-gray-500/10">
             <div class="space-y-2 py-6">
-              <router-link :to="{ name: 'inventory' }" 
+              <router-link :to="{ name: 'inventory' }"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
                 Inventory
               </router-link>
-              <router-link :to="{ name: 'dispatch-notes' }" 
+              <router-link :to="{ name: 'dispatch-notes' }"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
                 Dispatch Notes
               </router-link>

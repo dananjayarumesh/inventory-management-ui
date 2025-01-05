@@ -18,19 +18,5 @@ services:
       networks:
          - private
 
-   # inventory-management-cypress:
-   #    image: cypress/browsers:22.12.0
-   #    container_name: inventory-management-cypress
-   #    hostname: inventory-management-cypress.local
-   #    working_dir: /work
-   #    # ports:
-   #    #   - "5200:5000" # Used when running CRA's dev server
-   #    volumes:
-   #       - ..:/work
-   #    environment:
-   #       - ENVIRONMENT=local
-   #    networks:
-   #       - private
-
 networks:
    private:

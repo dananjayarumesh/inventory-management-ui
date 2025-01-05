@@ -13,8 +13,7 @@ RUN apt-get update
 RUN apt-get install -y \
     lsb-release \
     curl
-
-
+    
 ################################################################################
 # Install TypeScript
 RUN npm install -g typescript@5.1.6

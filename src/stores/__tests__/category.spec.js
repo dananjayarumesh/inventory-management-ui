@@ -33,9 +33,7 @@ describe('useCategoryStore', () => {
     });
 
     const result = await categoryStore.load();
-
     expect(getCategories).toHaveBeenCalled();
-
     expect(result).toBe(true);
     expect(categoryStore.categories.value).toEqual([
       { id: 1, name: 'Category 1' },
@@ -46,13 +44,10 @@ describe('useCategoryStore', () => {
 
   it('handles API errors during category load', async () => {
     const categoryStore = useCategoryStore();
-
     vi.mocked(getCategories).mockRejectedValue(new Error('API error'));
 
     const result = await categoryStore.load();
-
     expect(getCategories).toHaveBeenCalled();
-
     expect(result).toBe(false);
     expect(categoryStore.categories).toEqual({});
     expect(categoryStore.loading).toBe(false);
@@ -60,7 +55,6 @@ describe('useCategoryStore', () => {
 
   it('sets loading state correctly during load', async () => {
     const categoryStore = useCategoryStore();
-
     vi.mocked(getCategories).mockImplementation(
       () =>
         new Promise((resolve) =>
@@ -73,13 +67,10 @@ describe('useCategoryStore', () => {
           }, 100)
         )
     );
-
     const loadPromise = categoryStore.load();
-
     expect(categoryStore.loading).toBe(true);
 
     await loadPromise;
-
     expect(categoryStore.loading).toBe(false);
   });
 });

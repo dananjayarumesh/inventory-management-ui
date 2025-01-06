@@ -34,7 +34,6 @@ describe('useAuthStore', () => {
     });
 
     const result = await authStore.login('test@example.com', 'password123');
-
     expect(guestApiClient.post).toHaveBeenCalledWith(
       `${import.meta.env.VITE_API_URL}/auth/login`,
       {
@@ -42,7 +41,6 @@ describe('useAuthStore', () => {
         password: 'password123',
       }
     );
-
     expect(result).toBe(true);
     expect(localStorage.getItem('access_token')).toBe('mocked_access_token');
     expect(authStore.errors.email).toBe('');
@@ -61,7 +59,6 @@ describe('useAuthStore', () => {
     });
 
     const result = await authStore.login('invalid@example.com', 'wrongpassword');
-
     expect(guestApiClient.post).toHaveBeenCalledWith(
       `${import.meta.env.VITE_API_URL}/auth/login`,
       {
@@ -69,7 +66,6 @@ describe('useAuthStore', () => {
         password: 'wrongpassword',
       }
     );
-
     expect(result).toBe(false);
     expect(authStore.errors.email).toBe('Invalid credentials');
     expect(authStore.loading).toBe(false);
@@ -77,10 +73,8 @@ describe('useAuthStore', () => {
 
   it('clears errors before login attempt', async () => {
     const authStore = useAuthStore();
-
     authStore.errors.email = 'Some error';
     authStore.errors.password = 'Another error';
-
     vi.mocked(guestApiClient.post).mockResolvedValue({
       data: {
         access_token: 'mocked_access_token',
@@ -88,18 +82,15 @@ describe('useAuthStore', () => {
     });
 
     await authStore.login('test@example.com', 'password123');
-
     expect(authStore.errors.email).toBe('');
     expect(authStore.errors.password).toBe('');
   });
 
   it('logs out and removes token', () => {
     const authStore = useAuthStore();
-
     localStorage.setItem('access_token', 'mocked_access_token');
 
     authStore.logout();
-
     expect(localStorage.getItem('access_token')).toBeNull();
   });
 });

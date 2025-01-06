@@ -27,7 +27,6 @@ describe('apiClient', () => {
     it('includes Authorization header if token exists', async () => {
       const token = 'mocked_token';
       localStorage.setItem(defines.accessTokenKey, token);
-
       authMock.onGet('/test').reply((config) => {
         expect(config.headers.Authorization).toBe(`Bearer ${token}`);
         return [200, { success: true }];
@@ -52,7 +51,6 @@ describe('apiClient', () => {
       authMock.onGet('/test').reply(401);
 
       await expect(authApiClient.get('/test')).rejects.toThrow();
-
       expect(localStorage.getItem(defines.accessTokenKey)).toBeNull();
       expect(router.push).toHaveBeenCalledWith({ path: '/login' });
     });
@@ -64,7 +62,6 @@ describe('apiClient', () => {
       await expect(authApiClient.get('/test')).rejects.toThrow(
         'Server Error: Please try again later.'
       );
-
       expect(alertMock).toHaveBeenCalledWith(
         'There was an issue with the server. Please try again later.'
       );
@@ -81,7 +78,6 @@ describe('apiClient', () => {
         expect(config.headers.Authorization).toBeUndefined();
         return [200, { success: true }];
       });
-
       const response = await guestApiClient.get('/test');
       expect(response.data.success).toBe(true);
     });
@@ -93,7 +89,6 @@ describe('apiClient', () => {
       await expect(guestApiClient.get('/test')).rejects.toThrow(
         'Server Error: Please try again later.'
       );
-
       expect(alertMock).toHaveBeenCalledWith(
         'There was an issue with the server. Please try again later.'
       );

@@ -78,32 +78,25 @@ describe('CategoryView', () => {
 
   it('should call deleteCategory when delete button is clicked', async () => {
     const wrapper = mount(CategoryView);
-
     processDeleteCategory.mockResolvedValue();
-
     await flushPromises();
 
     wrapper.findComponent(ListTable).vm.$emit('delete', 1);
-
     expect(processDeleteCategory).toHaveBeenCalledWith(1);
     expect(categoryStoreMock.load).toHaveBeenCalled();
   });
 
   it('should show the add category popup when the button is clicked', async () => {
     const wrapper = mount(CategoryView);
-
     expect(wrapper.vm.showAddPopup).toBe(false);
-
+    
     await wrapper.find('button').trigger('click');
-
     expect(wrapper.vm.showAddPopup).toBe(true);
   });
 
   it.skip('should handle errors during deleteCategory', async () => {
     processDeleteCategory.mockRejectedValue(new Error('Delete failed'));
-
     const wrapper = mount(CategoryView);
-
     await flushPromises();
 
     await wrapper.findComponent(ListTable).vm.triggerDelete(1);

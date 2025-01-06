@@ -35,7 +35,6 @@ describe('LoginView', () => {
     useAuthStore.mockReturnValue(mockAuth);
 
     const wrapper = mount(LoginView);
-
     expect(wrapper.find('p.text-red-500').exists()).toBe(true);
     expect(wrapper.text()).toContain('Invalid email');
     expect(wrapper.text()).toContain('Invalid password');
@@ -52,10 +51,8 @@ describe('LoginView', () => {
     useRouter.mockReturnValue(mockRouter);
 
     const wrapper = mount(LoginView);
-
     await wrapper.find('input[name="email"]').setValue('test@example.com');
     await wrapper.find('input[name="password"]').setValue('password123');
-
     await wrapper.find('form').trigger('submit.prevent');
     expect(mockAuth.login).toHaveBeenCalledWith('test@example.com', 'password123');
     expect(mockRouter.push).toHaveBeenCalledWith({ path: '/' });
@@ -72,7 +69,6 @@ describe('LoginView', () => {
     useRouter.mockReturnValue(mockRouter);
 
     const wrapper = mount(LoginView);
-
     await wrapper.find('input[name="email"]').setValue('test@example.com');
     await wrapper.find('input[name="password"]').setValue('wrongpassword');
     await wrapper.find('form').trigger('submit.prevent');

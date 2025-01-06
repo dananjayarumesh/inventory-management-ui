@@ -51,8 +51,8 @@ describe('CategoryAddView', () => {
       },
     });
     wrapper.vm.nameError = 'test error';
-    await wrapper.find('button[type="button"]').trigger('click');
 
+    await wrapper.find('button[type="button"]').trigger('click');
     expect(wrapper.emitted().closed).toBeTruthy();
     expect(wrapper.vm.nameError).toBe('');
   });
@@ -66,13 +66,9 @@ describe('CategoryAddView', () => {
     submitCategory.mockResolvedValueOnce();
 
     await wrapper.find('input#name').setValue('New Category');
-
     await wrapper.find('form').trigger('submit.prevent');
-
     await flushPromises();
-
     expect(submitCategory).toHaveBeenCalledWith('New Category');
-
     expect(categoryStoreMock.load).toHaveBeenCalled();
     expect(wrapper.emitted().closed).toBeTruthy();
   });

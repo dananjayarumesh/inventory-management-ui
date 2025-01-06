@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
 // import HomeView from '../views/HomeView.vue'
 // import InventoryView from '@/views/InventoryView.vue'
 
@@ -44,6 +44,6 @@ const router = createRouter({
       meta: { auth: true },
     },
   ],
-})
+});
 
-export default router
+export default router;

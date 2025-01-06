@@ -1,14 +1,14 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 import {
   Dialog,
   DialogPanel,
   PopoverGroup,
-} from '@headlessui/vue'
+} from '@headlessui/vue';
 import {
   Bars3Icon,
   XMarkIcon,
-} from '@heroicons/vue/24/outline'
+} from '@heroicons/vue/24/outline';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter, useRoute } from 'vue-router';
 
@@ -16,13 +16,13 @@ const auth = useAuthStore();
 const router = useRouter();
 const route = useRoute();
 
-const mobileMenuOpen = ref(false)
+const mobileMenuOpen = ref(false);
 const routeName = route.name;
 
 const logout = async () => {
   auth.logout();
   router.push({ path: '/login' });
-}
+};
 </script>
 
 <template>
@@ -35,7 +35,8 @@ const logout = async () => {
         </a>
       </div>
       <div class="flex lg:hidden">
-        <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+        <button type="button"
+class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
           @click="mobileMenuOpen = true">
           <span class="sr-only">Open main menu</span>
           <Bars3Icon class="size-6" aria-hidden="true" />
@@ -79,7 +80,8 @@ const logout = async () => {
         <div class="flex items-center justify-between">
           <a href="#" class="-m-1.5 p-1.5">
             <span class="sr-only">Your Company</span>
-            <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
+            <img class="h-8 w-auto"
+src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
               alt="" />
           </a>
           <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = false">

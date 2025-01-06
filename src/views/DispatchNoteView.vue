@@ -1,5 +1,5 @@
 <script setup>
-import TopMenu from '../components/TopMenu.vue'
+import TopMenu from '../components/TopMenu.vue';
 </script>
 
 <template>

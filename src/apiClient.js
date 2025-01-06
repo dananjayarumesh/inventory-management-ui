@@ -1,17 +1,16 @@
 // src/axios.js
 import axios from 'axios';
 
-const apiClient = axios.create({
+const authApiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL, // Replace with your API base URL
   timeout: 5000,
 });
 
 // Add a request interceptor
-apiClient.interceptors.request.use(
+authApiClient.interceptors.request.use(
   (config) => {
     // Get the token from local storage
-    const token = localStorage.getItem('accessToken');
-
+    const token = localStorage.getItem('access_token');
     // If the token exists, attach it to the headers
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -24,4 +23,4 @@ apiClient.interceptors.request.use(
   }
 );
 
-export default apiClient;
+export { authApiClient };

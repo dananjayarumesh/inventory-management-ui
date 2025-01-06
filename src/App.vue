@@ -1,6 +1,6 @@
 <script setup>
-import { RouterView, useRoute } from 'vue-router'
-import TopMenu from './components/TopMenu.vue'
+import { RouterView, useRoute } from 'vue-router';
+import TopMenu from './components/TopMenu.vue';
 
 const route = useRoute();
 const isAuthRoute = route.meta.auth === true;

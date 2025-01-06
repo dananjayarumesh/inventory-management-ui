@@ -1,6 +1,6 @@
 import { ref, reactive } from 'vue';
 import { defineStore } from 'pinia';
-import { authApiClient } from '@/apiClient';
+import { getCategories } from '@/services/categoryService';
 
 export const useCategoryStore = defineStore('category', () => {
   const categories = reactive({});
@@ -10,7 +10,7 @@ export const useCategoryStore = defineStore('category', () => {
     loading.value = true;
 
     try {
-      const response = await authApiClient.get('/categories');
+      const response = await getCategories();
       categories.value = response.data.data;
       return true;
       // eslint-disable-next-line no-unused-vars

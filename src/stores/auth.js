@@ -1,6 +1,6 @@
 import { ref, reactive } from 'vue';
 import { defineStore } from 'pinia';
-import axios from 'axios';
+import { guestApiClient } from '@/services/apiClient';
 
 export const useAuthStore = defineStore('auth', () => {
   const errors = reactive({});
@@ -15,11 +15,11 @@ export const useAuthStore = defineStore('auth', () => {
     const apiUrl = import.meta.env.VITE_API_URL;
 
     try {
-      const response = await axios.post(`${apiUrl}/auth/login`, {
+      const response = await guestApiClient.post(`${apiUrl}/auth/login`, {
         email,
         password,
       });
-      localStorage.setItem('access_token', response.data.access_token); // Save token
+      localStorage.setItem('access_token', response.data.access_token); 
       return true;
     } catch (error) {
       if (error.response?.data?.error) {

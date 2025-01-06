@@ -1,8 +1,8 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import TopMenu from '../components/TopMenu.vue';
-import ListTable from '../components/ListTable.vue';
-import CategoryAddView from './categories/CategoryAddView.vue';
+import TopMenu from '@/components/TopMenu.vue';
+import ListTable from '@/components/ListTable.vue';
+import CategoryAddView from '@/views/categories/CategoryAddView.vue';
 import { useCategoryStore } from '@/stores/category';
 import { deleteCategory as processDeleteCategory } from '@/services/categoryService';
 
@@ -34,6 +34,7 @@ const deleteCategory = (async (id) => {
     await processDeleteCategory(id);
     await categoryStore.load();
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(error);
     //TODO: handle error
   }

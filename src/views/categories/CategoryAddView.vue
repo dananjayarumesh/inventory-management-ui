@@ -25,7 +25,7 @@ const categoryStore = useCategoryStore();
 
 const submitData = (async () => {
   try {
-    resetForm();
+    nameError.value = '';
     await submitCategory(name.value);
     // reload categories
     categoryStore.load();
@@ -38,6 +38,7 @@ const submitData = (async () => {
 });
 
 const resetForm = (() => {
+  name.value = '';
   nameError.value = '';
 });
 
@@ -58,9 +59,7 @@ const resetForm = (() => {
             <div class="mt-3 col-span-full">
               <label for="name" class="block text-sm/6 font-medium text-gray-900">Name *</label>
               <div class="mt-2">
-                <input type="text" 
-                id="name" 
-                v-model="name"
+                <input type="text" id="name" v-model="name"
                   class="block w-full w-100 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                 <p v-if="nameError" class="text-sm text-red-500">{{ nameError }}</p>
               </div>
@@ -74,8 +73,7 @@ const resetForm = (() => {
         class="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto">Submit</button>
       <button type="button"
         class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-        @click="closeDialog" 
-        ref="cancelButtonRef">Cancel</button>
+        @click="closeDialog" ref="cancelButtonRef">Cancel</button>
     </template>
   </AppModal>
 </template>

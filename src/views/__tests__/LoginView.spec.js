@@ -4,7 +4,6 @@ import LoginView from '../LoginView.vue';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
 
-// Mock the auth store and router
 vi.mock('@/stores/auth', () => ({
   useAuthStore: vi.fn(),
 }));
@@ -54,17 +53,11 @@ describe('LoginView', () => {
 
     const wrapper = mount(LoginView);
 
-    // Set form values
     await wrapper.find('input[name="email"]').setValue('test@example.com');
     await wrapper.find('input[name="password"]').setValue('password123');
 
-    // Trigger form submission
     await wrapper.find('form').trigger('submit.prevent');
-
-    // Assert login function called with correct arguments
     expect(mockAuth.login).toHaveBeenCalledWith('test@example.com', 'password123');
-
-    // Assert router navigation on success
     expect(mockRouter.push).toHaveBeenCalledWith({ path: '/' });
   });
 
@@ -80,17 +73,10 @@ describe('LoginView', () => {
 
     const wrapper = mount(LoginView);
 
-    // Set form values
     await wrapper.find('input[name="email"]').setValue('test@example.com');
     await wrapper.find('input[name="password"]').setValue('wrongpassword');
-
-    // Trigger form submission
     await wrapper.find('form').trigger('submit.prevent');
-
-    // Assert login function called
     expect(mockAuth.login).toHaveBeenCalledWith('test@example.com', 'wrongpassword');
-
-    // Assert router navigation does not happen
     expect(mockRouter.push).not.toHaveBeenCalled();
   });
 });

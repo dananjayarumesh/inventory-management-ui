@@ -70,7 +70,7 @@ class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray
         </router-link>
       </PopoverGroup>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <a href="#" class="text-sm/6 font-semibold text-gray-900" @click="logout">Log Out</a>
+        <a href="#" id="logout" class="text-sm/6 font-semibold text-gray-900" @click="logout">Log Out</a>
       </div>
     </nav>
     <Dialog class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">

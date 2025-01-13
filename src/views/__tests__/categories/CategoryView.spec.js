@@ -18,7 +18,7 @@ vi.mock('@/components/TopMenu.vue', () => ({
 vi.mock('@/components/ListTable.vue', () => ({
   default: {
     name: 'ListTable',
-    template: '<div>ListTable</div>',
+    template: '<div>ListTable</div><slot name="tools" :rowId="1"></slot>',
     props: ['headers', 'rows', 'loading'],
     emits: ['delete'],
     methods: {
@@ -81,7 +81,7 @@ describe('CategoryView', () => {
     processDeleteCategory.mockResolvedValue();
     await flushPromises();
 
-    wrapper.findComponent(ListTable).vm.$emit('delete', 1);
+    wrapper.findAll('button')[2].trigger('click');
     expect(processDeleteCategory).toHaveBeenCalledWith(1);
     expect(categoryStoreMock.load).toHaveBeenCalled();
   });

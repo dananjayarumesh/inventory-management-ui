@@ -52,7 +52,7 @@ const deleteCategory = (async (id) => {
     </template>
     <template #content>
       <div class="mx-auto">
-        <ListTable :headers="headers" :rows="categories" :loading="loading" @delete="deleteCategory">
+        <ListTable :headers="headers" :rows="categories" :loading="loading">
           <template #tools="{ rowId }">
             <button class="px-3 py-1 text-white bg-blue-500 rounded hover:bg-blue-600"
               @click="emit('edit', rowId)">Edit</button>

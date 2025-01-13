@@ -1,26 +1,18 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import MockAdapter from 'axios-mock-adapter';
-import { useRouter } from 'vue-router';
+import router from '@/router/index';
 import { authApiClient, guestApiClient } from '../apiClient';
 import defines from '@/defines';
 
-vi.mock('vue-router', () => ({
-  useRouter: vi.fn(() => ({
-    push: vi.fn(),
-  })),
-}));
-
 describe('apiClient', () => {
-  let authMock, guestMock, router;
+  let authMock, guestMock;
 
   beforeEach(() => {
     authMock = new MockAdapter(authApiClient);
     guestMock = new MockAdapter(guestApiClient);
+    vi.spyOn(router, 'push').mockImplementation(() => {});
 
     localStorage.clear();
-
-    router = useRouter();
-    vi.clearAllMocks();
   });
 
   describe('authApiClient', () => {
@@ -46,7 +38,7 @@ describe('apiClient', () => {
       expect(response.data.success).toBe(true);
     });
 
-    it.skip('handles 401 response by clearing token and redirecting to login', async () => {
+    it('handles 401 response by clearing token and redirecting to login', async () => {
       localStorage.setItem(defines.accessTokenKey, 'mocked_token');
       authMock.onGet('/test').reply(401);
 
@@ -56,7 +48,7 @@ describe('apiClient', () => {
     });
 
     it('handles 500 response by alerting user', async () => {
-      const alertMock = vi.spyOn(window, 'alert').mockImplementation(() => {});
+      const alertMock = vi.spyOn(window, 'alert').mockImplementation(() => { });
       authMock.onGet('/test').reply(500);
 
       await expect(authApiClient.get('/test')).rejects.toThrow(
@@ -83,7 +75,7 @@ describe('apiClient', () => {
     });
 
     it('handles 500 response by alerting user', async () => {
-      const alertMock = vi.spyOn(window, 'alert').mockImplementation(() => {});
+      const alertMock = vi.spyOn(window, 'alert').mockImplementation(() => { });
       guestMock.onGet('/test').reply(500);
 
       await expect(guestApiClient.get('/test')).rejects.toThrow(

@@ -1,8 +1,6 @@
 import axios from 'axios';
 import defines from '@/defines';
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
+import router from '@/router/index';
 
 // used for auth requests
 const authApiClient = axios.create({

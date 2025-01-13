@@ -45,27 +45,27 @@ class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray
       <PopoverGroup class="hidden lg:flex lg:gap-x-12">
         <router-link :to="{ name: 'inventory' }"
           class="py-2.5 px-2 rounded-md text-sm/6 font-semibold text-gray-900"
-          :class="{ 'bg-blue-700 text-white': routeName === 'inventory' }">
+          :class="{ '': routeName === 'inventory' }">
           Inventory
         </router-link>
         <router-link :to="{ name: 'dispatch-notes' }" 
         class="py-2.5 px-2 rounded-md text-sm/6 font-semibold text-gray-900"
-        :class="{ 'bg-blue-700 text-white': routeName === 'dispatch-notes' }">
+        :class="{ '': routeName === 'dispatch-notes' }">
           Dispatch Notes
         </router-link>
         <router-link :to="{ name: 'receive-notes' }" 
         class="py-2.5 px-2 rounded-md text-sm/6 font-semibold text-gray-900"
-        :class="{ 'bg-blue-700 text-white': routeName === 'receive-notes' }">
+        :class="{ '': routeName === 'receive-notes' }">
           Receive Notes
         </router-link>
         <router-link :to="{ name: 'categories' }" 
         class="py-2.5 px-2 rounded-md text-sm/6 font-semibold text-gray-900"
-        :class="{ 'bg-blue-700 text-white': routeName === 'categories' }">
+        :class="{ '': routeName === 'categories' }">
           Categories
         </router-link>
         <router-link :to="{ name: 'users' }" 
         class="py-2.5 px-2 rounded-md text-sm/6 font-semibold text-gray-900"
-        :class="{ 'bg-blue-700 text-white': routeName === 'users' }">
+        :class="{ '': routeName === 'users' }">
           Users
         </router-link>
       </PopoverGroup>

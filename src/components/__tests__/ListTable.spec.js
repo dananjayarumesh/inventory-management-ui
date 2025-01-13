@@ -4,7 +4,7 @@ import { describe, it, expect } from 'vitest';
 
 describe('ListTable', () => {
   it('renders table with headers and rows', () => {
-    const headers = ['ID', 'Name'];
+    const headers = [{ value: 'ID', width: 20 }, { value: 'Name' }];
     const rows = [
       { id: 1, Name: 'Category 1' },
       { id: 2, Name: 'Category 2' },
@@ -17,48 +17,19 @@ describe('ListTable', () => {
       },
     });
 
-    headers.forEach(header => {
-      expect(wrapper.text()).toContain(header);
+    headers.forEach((header, index) => {
+      const headers = wrapper.find('thead').findAll('th');
+
+      expect(headers[index].attributes('width')).toContain(header.width);
+      expect(headers[index].text()).toContain(header.value);
     });
 
-    rows.forEach(row => {
-      expect(wrapper.text()).toContain(row.Name);
+    rows.forEach((row, index) => {
+      const tableRows = wrapper.find('tbody').findAll('tr');
+      const fields = tableRows[index].findAll('td');
+
+      expect(fields[0].text()).toContain(rows[index].id);
+      expect(fields[1].text()).toContain(rows[index].Name);
     });
-  });
-
-  it('emits edit event with row id when edit button is clicked', async () => {
-    const headers = ['ID', 'Name'];
-    const rows = [
-      { id: 1, Name: 'Category 1' },
-      { id: 2, Name: 'Category 2' },
-    ];
-
-    const wrapper = mount(ListTable, {
-      props: {
-        headers,
-        rows,
-      },
-    });
-
-    await wrapper.findAll('button.bg-blue-500').at(0).trigger('click');
-    expect(wrapper.emitted('edit')[0]).toEqual([1]);
-  });
-
-  it('emits delete event with row id when delete button is clicked', async () => {
-    const headers = ['ID', 'Name'];
-    const rows = [
-      { id: 1, Name: 'Category 1' },
-      { id: 2, Name: 'Category 2' },
-    ];
-
-    const wrapper = mount(ListTable, {
-      props: {
-        headers,
-        rows,
-      },
-    });
-
-    await wrapper.findAll('button.bg-red-500').at(0).trigger('click');
-    expect(wrapper.emitted('delete')[0]).toEqual([1]);
   });
 });

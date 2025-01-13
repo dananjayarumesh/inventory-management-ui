@@ -5,10 +5,11 @@ import ListTable from '@/components/ListTable.vue';
 import CategoryAddView from '@/views/categories/CategoryAddView.vue';
 import { useCategoryStore } from '@/stores/category';
 import { deleteCategory as processDeleteCategory } from '@/services/categoryService';
+import BaseLayout from '@/layouts/BaseLayout.vue';
 
 const categoryStore = useCategoryStore();
 
-const headers = ref(['#', 'Name']);
+const headers = ref([{ value: '#', width: 5 }, { value: 'Name' }]);
 const loading = ref(true);
 const showAddPopup = ref(false);
 
@@ -43,14 +44,24 @@ const deleteCategory = (async (id) => {
 
 <template>
   <TopMenu></TopMenu>
-  <button class="px-3 py-1 text-white bg-blue-500 rounded hover:bg-blue-600" @click="showAddPopup = true">
-    Add Category
-  </button>
-  <div class="container mx-auto">
-    <ListTable :headers="headers"
-:rows="categories"
-:loading="loading"
-@delete="deleteCategory"></ListTable>
-  </div>
+  <BaseLayout title="Categories" description="List of inventory categories added to the system.">
+    <template #tools>
+      <button class="px-3 py-1 text-white bg-blue-500 rounded hover:bg-blue-600" @click="showAddPopup = true">
+        Add Category
+      </button>
+    </template>
+    <template #content>
+      <div class="mx-auto">
+        <ListTable :headers="headers" :rows="categories" :loading="loading" @delete="deleteCategory">
+          <template #tools="{ rowId }">
+            <button class="px-3 py-1 text-white bg-blue-500 rounded hover:bg-blue-600"
+              @click="emit('edit', rowId)">Edit</button>
+            <button class="px-3 py-1 text-white bg-red-500 rounded hover:bg-red-600"
+              @click="deleteCategory(rowId)">Delete</button>
+          </template>
+        </ListTable>
+      </div>
+    </template>
+  </BaseLayout>
   <CategoryAddView :show="showAddPopup" @closed="showAddPopup = false"></CategoryAddView>
 </template>

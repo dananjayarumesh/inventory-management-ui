@@ -14,7 +14,6 @@ defineProps({
   },
 });
 
-const emit = defineEmits(['edit', 'delete']);
 </script>
 
 <template>
@@ -22,11 +21,11 @@ const emit = defineEmits(['edit', 'delete']);
     <table class="min-w-full border-collapse border border-gray-200">
       <thead>
         <tr class="bg-gray-100">
-          <th v-for="(header, index) in headers" :key="index"
+          <th v-for="(header, index) in headers" :key="index" :width="`${header.width}%`"
             class="px-6 py-3 text-left text-sm font-medium text-gray-700 border border-gray-200">
-            {{ header }}
+            {{ header.value }}
           </th>
-          <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 border border-gray-200"></th>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 border border-gray-200" width="20%"></th>
         </tr>
       </thead>
       <tbody>
@@ -35,11 +34,8 @@ const emit = defineEmits(['edit', 'delete']);
             class="px-6 py-4 text-sm text-gray-900 border border-gray-200">
             {{ value }}
           </td>
-          <td class="px-6 py-4 text-sm text-gray-900 border border-gray-200">
-            <button class="px-3 py-1 text-white bg-blue-500 rounded hover:bg-blue-600"
-              @click="emit('edit', row.id)">Edit</button>
-            <button class="px-3 py-1 text-white bg-red-500 rounded hover:bg-red-600"
-              @click="emit('delete', row.id)">Delete</button>
+          <td class="px-6 py-4 text-sm text-gray-900 border border-gray-200 space-x-1">
+            <slot name="tools" :rowId="row.id"></slot>
           </td>
         </tr>
       </tbody>

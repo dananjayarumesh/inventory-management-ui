@@ -1,0 +1,8 @@
+# Dockerfile for Cypress
+FROM cypress/browsers:22.12.0
+
+# Set the working directory
+WORKDIR /work
+
+# Run Cypress tests
+CMD ["npx", "cypress", "run"]

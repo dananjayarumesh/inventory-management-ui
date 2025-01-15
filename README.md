@@ -2,6 +2,8 @@
 
 A simple inventory management system that tracks the receipt and dispatch of quantities, with automated alerts when inventory levels hit predefined thresholds.
 
+[![Inventory Management UI tests](https://github.com/dananjayarumesh/inventory-management-ui/actions/workflows/tests.yaml/badge.svg)](https://github.com/dananjayarumesh/inventory-management-ui/actions/workflows/tests.yaml)
+
 ### Overview
 * [Development environment setup](#development-environment-setup)
 * [Environment variables](#environment-variables)
